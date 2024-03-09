@@ -1,24 +1,40 @@
 # README
+---
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Movies Project
 
-Things you may want to cover:
+## Overview
 
-* Ruby version
+The Movies Project is a Ruby on Rails application designed for managing movies and reviews. It allows users to browse, add, edit, and review movies, providing a platform for movie enthusiasts to share their opinions and recommendations.
 
-* System dependencies
+## Ruby Version
 
-* Configuration
+This project requires Ruby version 3.2.2. Make sure you have Ruby 3.2.2 installed on your system before proceeding.
 
-* Database creation
+## System Dependencies
 
-* Database initialization
+Ensure that you have all the necessary system dependencies installed before running the application. This may include tools like Node.js, Yarn, or specific database systems like SQLite.
 
-* How to run the test suite
+## Configuration
 
-* Services (job queues, cache servers, search engines, etc.)
+Before running the application, configure your environment variables and settings as needed. This could include database configuration, API keys, or other sensitive information. Refer to the configuration files and documentation for guidance.
 
-* Deployment instructions
+## Database Setup
 
-* ...
+To set up the database for this project, run the following command:
+
+```bash
+rails db:migrate
+```
+
+This command will execute all pending migrations and create the necessary database tables.
+
+## Importing Data from CSV
+
+If you need to import data from CSV files, you can use the following command:
+
+```bash
+rails import:from_csv
+```
+
+
