@@ -1,0 +1,14 @@
+//= require jquery
+//= require jquery_ujs
+//= require jquery-ui
+//= require dataTables/jquery.dataTables
+//= require turbolinks
+//= require_tree .
+//= require select2
+//= require select2/select2.full.min.js
+//= require jquery.turbolinks
+//= require twitter/bootstrap
+//= require masonry/jquery.masonry
+//= require masonry/jquery.imagesloaded.min
+//= require masonry/modernizr-transitions
+//= require turbolinks

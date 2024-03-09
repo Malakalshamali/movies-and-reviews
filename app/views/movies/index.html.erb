@@ -1,0 +1,125 @@
+<div class="form-title bg-primary text-white py-3">
+  <h1>All Movies</h1>
+</div>
+<br>
+<div class="wrapper wrapper-content animated">
+  <div class="row" , style="margin-left: 30px">
+    <div class="col-lg-12">
+      <%= search_form_for @q do |f| %>
+        <div class="row">
+          <div class="col-lg-3"> <!-- Increase the width to 8 columns -->
+            <%= f.label :actor_eq, 'Actor' %>
+            <%= f.select(:actor_eq, options_for_select(Movie.pluck(:actor).uniq, (params[:q].present? ? params[:q][:actor_eq] : nil)),
+                         { include_blank: 'Select Actor' }, { multiple: false, class: 'form-control select2', 'data-allow-clear': true, 'data-placeholder': 'Select Actor' }) %>
+          </div>
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <%= f.submit class: 'btn btn-primary btn-sm float-right mr-3' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="row">
+          <% if @movies.present? %>
+            <div class="movie-container">
+              <% @movies.each do |movie| %>
+                <div class="col-md-3">
+                  <div class="movie-card">
+                    <p class="card-text" style="float: right; margin-left: 10px; padding: 10px 30px;">
+                      <strong>Rating:</strong>
+                      <%= movie.reviews.present? ? Movie.first.reviews.average(:stars) : "No rating yet!" %>
+                    </p><br>
+                    <div class="card-body">
+                      <h2 class="card-title"><%= movie.id %></h2>
+                      <p class="card-text"><strong>Year:</strong> <%= movie.year %></p>
+                      <p class="card-text"><strong>Director:</strong> <%= movie.director %></p>
+                      <p class="card-text"><strong>Actor:</strong> <%= movie.actor %></p>
+                      <p class="card-text"><strong>Filming_location:</strong> <%= movie.filming_location %></p>
+                      <p class="card-text"><strong>Country:</strong> <%= movie.country %></p>
+                      <%#= button_to "Destroy", movie, method: :delete, class: 'btn btn-danger', style: 'float: right; margin-left: 10px;' %>
+                      <p class="card-text" style="float: right; margin-left: 10px; padding: 10px 30px;">
+                        <%= link_to 'View', movie_path(movie), class: 'btn btn-primary', style: 'float: right;' %>
+                      </p><br>
+                      _______________________
+                      <h4>Reviews:</h4>
+                      <% movie = Movie.find_by(id: movie.id)
+                         if movie.reviews.any? %>
+                        <ul>
+                          <% movie.reviews.sort_by(&:stars).reverse.each do |review| %>
+                            <li>
+                              <strong>User:</strong> <%= review.user %><br>
+                              <strong>Stars:</strong> <%= review.stars %><br>
+                              <strong>Review:</strong> <%= review.review %>
+                            </li>
+                            <br><br>
+                          <% end %>
+                        </ul>
+                      <% else %>
+                        <p>No reviews available.</p>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <h2 style="margin-left: 30px">There are no movies!</h2>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%#= link_to 'New Movie', new_movie_path, class: 'btn btn-primary', style: 'margin-left: 50px;' %>
+
+<style>
+    .form-title {
+        color: white;
+        background-color: black;
+        padding: 1rem;
+        margin-bottom: 20px; /* Add margin bottom */
+    }
+
+    .form-title h2 {
+        margin: 0;
+    }
+
+    .movie-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 1px;
+    }
+
+    .movie-card {
+        width: calc(100% - 100px); /* Adjust to 4 movies per row */
+        margin: 60px;
+        border: 4px solid #ddd; /* Increase border thickness */
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .movie-card .card-body {
+        padding: 50px; /* Adjust padding */
+    }
+
+    .movie-card .btn-primary:hover {
+        color: white;
+        background-color: #0056b3; /* Darker Blue on hover */
+        border-color: #0056b3;
+    }
+</style>
+
+<script type="module" src="https://code.jquery.com/jquery-3.3.1.min.js">
+    $(document).ready(function () {
+        $('.select2').select2();
+    });
+
+
+</script>

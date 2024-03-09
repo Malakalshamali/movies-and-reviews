@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Application Name</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <!-- Include Bootstrap CSS -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<header>
+  <!-- Your header content goes here -->
+  <nav>
+    <!-- Navigation menu -->
+  </nav>
+</header>
+
+<div class="container">
+  <%= yield %>
+</div>
+
+<footer>
+  <!-- Your footer content goes here -->
+</footer>
+
+<!-- Include Bootstrap JavaScript -->
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>

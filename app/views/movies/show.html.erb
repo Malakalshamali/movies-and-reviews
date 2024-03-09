@@ -1,0 +1,87 @@
+<% if @movie.present? %>
+  <div class="wrapper wrapper-content animated ">
+    <div class="movie-card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                <% Movie.column_names.each do |col| %>
+                  <tr>
+                    <td><strong><%= col == 'id' ? '#' : col.humanize %></strong></td>
+                    <td>
+                      <%= @movie.send(col) %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="container-fluid">
+            <div class="row">
+              <br><br>
+              <%= link_to 'Back', movies_path, class: 'btn btn-primary', style: 'float: right; size:30px; margin-left: 10px; padding: 15px 30px;' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<style>
+    body {
+        margin-left: 50px;
+        padding-top: 50px;
+        margin-bottom: 50px;
+
+    }
+
+    @media (min-width: 768px) {
+        body {
+            margin-left: 50px;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+    }
+
+    .form-title {
+        color: white;
+        background-color: black;
+        padding: 1rem;
+        margin-bottom: 20px; /* Add margin bottom */
+    }
+
+    .form-title h2 {
+        margin: 0;
+    }
+
+    .movie-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 1px;
+    }
+
+    .movie-card {
+        width: calc(80% - 20px); /* Adjust to 4 movies per row */
+        margin: 70px;
+        border: 4px solid #ddd; /* Increase border thickness */
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .movie-card .card-body {
+        padding: 50px; /* Adjust padding */
+    }
+
+    .movie-card .btn-primary:hover {
+        color: white;
+        background-color: #0056b3; /* Darker Blue on hover */
+        border-color: #0056b3;
+    }
+</style>
+
